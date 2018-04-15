@@ -10,9 +10,16 @@ public class Find {
     private String fileName;
 
     public Find(String fileName, boolean searchInSubdirectories, String directoryPath) {
+
+        File folder = new File(directoryPath);
+
+        if (fileName.isEmpty()) throw new IllegalArgumentException("File name is empty!");
+        if (!folder.isDirectory()) throw new IllegalArgumentException("It not directory!");
+        if (!folder.exists()) throw new IllegalArgumentException("Directory is not exist!");
+
+
         this.fileName = fileName;
-        System.out.println(directoryPath);
-        searchFiles(new File(directoryPath), searchInSubdirectories);
+        searchFiles(folder, searchInSubdirectories);
     }
 
     private void searchFiles(File folder, boolean searchInSubdirectories) {
